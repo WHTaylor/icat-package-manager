@@ -1,13 +1,15 @@
+import shutil
 from urllib.request import urlopen
+from typing import List
 
 import lxml.html
 
-from src.ipm.utils import Version
+from utils import Version
 
-_default_repo = "https://repo.icatproject.org/repo/org/icatproject/"
+_default_repo = "https://repo.icatproject.org/repo/org/icatproject"
 
 
-def _get_table_rows(page):
+def _get_table_rows(page: str):
     parsed = lxml.html.fromstring(page)
     table_rows = parsed.xpath("body/table//tr")
     # First rows are headers/dividers, last is a divider
@@ -16,16 +18,16 @@ def _get_table_rows(page):
     return [r.getchildren()[1].getchildren()[0] for r in package_rows]
 
 
-def get_packages(repo_url=_default_repo):
+def get_packages(repo_url=_default_repo) -> List[str]:
     with urlopen(repo_url) as f:
         if f.status != 200:
             raise Exception(f"Couldn't reach {repo_url}")
         page = f.read().decode()
         links = _get_table_rows(page)
-        return [link.text.strip("/") for link in links]
+        return [link.get("href").strip("/") for link in links]
 
 
-def get_package_versions(package_name, repo_url=_default_repo):
+def get_package_versions(package_name: str, repo_url=_default_repo) -> List[Version]:
     with urlopen(f"{repo_url}/{package_name}") as f:
         if f.status != 200:
             raise Exception(f"Couldn't reach {repo_url}")
