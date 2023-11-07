@@ -1,5 +1,5 @@
-import re
 import functools
+import re
 
 version_patt = re.compile(r"^(\d+)\.(\d+)\.(\d+)(-(.+))?")
 
@@ -8,6 +8,8 @@ version_patt = re.compile(r"^(\d+)\.(\d+)\.(\d+)(-(.+))?")
 class Version:
     def __init__(self, string: str):
         m = version_patt.match(string)
+        if not m:
+            raise ValueError(f"{string} is not a valid version")
         self._x = int(m.group(1))
         self._y = int(m.group(2))
         self._z = int(m.group(3))
