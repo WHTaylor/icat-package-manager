@@ -1,16 +1,28 @@
 from typing import Optional
 import argparse
 import repo
+import files
 
 
 def do_list(component: Optional[str]):
-    if component:
-        result = repo.get_package_versions(component)
-    else:
-        result = repo.get_packages()
+    installed = files.get_installed_packages()
 
-    for r in result:
-        print(r)
+    if component:
+        available_versions = repo.get_package_versions(component)
+        installed_versions = installed[component]
+        for v in available_versions:
+            if v in installed_versions:
+                print(f"{v} (installed)")
+            else:
+                print(v)
+    else:
+        available = repo.get_packages()
+        for package in available:
+            if package in installed:
+                current = max(installed[package])
+                print(f"{package} (installed: {current})")
+            else:
+                print(package)
 
 
 def do_install(component: str, version: Optional[str] = None):
