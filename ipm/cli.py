@@ -63,7 +63,7 @@ def do_install(
     files.copy_config(component, max(installed), install_version)
 
 
-if __name__ == "__main__":
+def run():
     parser = argparse.ArgumentParser(
         description="Find and install ICAT components")
     subparsers = parser.add_subparsers(required=True)
@@ -101,3 +101,7 @@ if __name__ == "__main__":
         k: v for k, v in vars(args).items() if k != "func"
     }
     args.func(**kwargs)
+
+
+if __name__ == "__main__":
+    run()
