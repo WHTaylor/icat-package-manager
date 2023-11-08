@@ -9,6 +9,7 @@ _default_install_location = Path.home() / "install"
 _default_cache_location = Path.home() / ".ipm" / "cache"
 
 Path.mkdir(_default_cache_location, parents=True, exist_ok=True)
+Path.mkdir(_default_install_location, parents=True, exist_ok=True)
 
 
 def get_distro_name(component: str, version: Version) -> str:
