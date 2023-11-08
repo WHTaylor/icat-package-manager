@@ -29,7 +29,9 @@ def get_components(repo_url=_default_repo) -> List[str]:
         return list(_extract_content_list_from_table(page))
 
 
-def get_component_versions(component: str, repo_url=_default_repo) -> List[Version]:
+def get_component_versions(
+        component: str,
+        repo_url=_default_repo) -> List[Version]:
     with urlopen(f"{repo_url}/{component}") as f:
         if f.status != 200:
             raise Exception(f"Couldn't reach {repo_url}")

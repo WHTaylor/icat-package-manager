@@ -35,7 +35,8 @@ def extract_distro(component: str, version: Version) -> Path:
     return dest
 
 
-def get_installed_packages(d=_default_install_location) -> Dict[str, List[Version]]:
+def get_installed_packages(
+        d=_default_install_location) -> Dict[str, List[Version]]:
     return {
         c.name: [Version(v.name) for v in c.iterdir() if Version.is_valid(v.name)]
         for c in d.iterdir()

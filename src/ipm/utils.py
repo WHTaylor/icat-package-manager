@@ -21,9 +21,9 @@ class Version:
 
     def __eq__(self, other):
         return self._x == other._x \
-               and self._y == other._y \
-               and self._z == other._z \
-               and self._suffix == other._suffix
+            and self._y == other._y \
+            and self._z == other._z \
+            and self._suffix == other._suffix
 
     def __lt__(self, other):
         """
