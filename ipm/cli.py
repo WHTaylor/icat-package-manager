@@ -1,9 +1,9 @@
 import argparse
 from typing import Optional
 
-import files
-import repo
-from utils import Version
+from . import files
+from . import repo
+from .utils import Version
 
 
 def do_list(component: Optional[str]):

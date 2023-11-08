@@ -1,3 +1,3 @@
-import cli
+from .cli import run
 
-cli.run()
+run()

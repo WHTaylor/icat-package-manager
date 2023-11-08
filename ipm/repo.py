@@ -5,8 +5,8 @@ from urllib.request import urlopen
 
 import lxml.html
 
-from files import get_cache_destination, get_distro_name
-from utils import Version
+from .files import get_cache_destination, get_distro_name
+from .utils import Version
 
 _default_repo = "https://repo.icatproject.org/repo/org/icatproject"
 

@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import List, Dict
 from zipfile import ZipFile
 
-from utils import Version
+from .utils import Version
 
 _default_install_location = Path.home() / "install"
 _default_cache_location = Path.home() / ".ipm" / "cache"

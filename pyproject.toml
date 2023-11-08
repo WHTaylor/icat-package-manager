@@ -14,7 +14,7 @@ Homepage = "https://github.com/WHTaylor/icat-package-manager"
 Repository = "https://github.com/WHTaylor/icat-package-manager"
 
 [project.scripts]
-ipm = "ipm:cli"
+ipm = "ipm.cli:run"
 
 [build-system]
 requires = ["setuptools", "wheel"]
