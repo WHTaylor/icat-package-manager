@@ -39,7 +39,7 @@ def do_install(
             return
         install_version = version
     else:
-        all_available = repo.get_component_versions(args.component)
+        all_available = repo.get_component_versions(component)
         available = [v for v in all_available if
                      (allow_snapshots or not v.is_snapshot())]
         latest = max(available)
