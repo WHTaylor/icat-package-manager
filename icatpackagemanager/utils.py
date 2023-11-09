@@ -40,7 +40,7 @@ class Version:
         >>> max(vs)
         10.0.1
         >>> min(vs)
-        1.1.1
+        1.1.1-SNAPSHOT
         """
         if self._x < other._x: return True
         if self._x > other._x: return False
@@ -51,8 +51,10 @@ class Version:
         if self._z < other._z: return True
         if self._z > other._z: return False
 
-        if not self._suffix and other._suffix: return True
-        return False
+        if not self._suffix and other._suffix: return False
+        if self._suffix and not other._suffix: return True
+        if not self._suffix and not other._suffix: return False
+        return self._suffix < other._suffix
 
     def is_snapshot(self):
         """
