@@ -66,7 +66,7 @@ def do_install(
 def run():
     parser = argparse.ArgumentParser(
         description="Find and install ICAT components")
-    subparsers = parser.add_subparsers(required=True)
+    subparsers = parser.add_subparsers()
 
     list_parser = subparsers.add_parser(
         "list",
@@ -97,6 +97,11 @@ def run():
     install_parser.set_defaults(func=do_install)
 
     args = parser.parse_args()
+    if not hasattr(args, 'func'):
+        print("Must provide a subcommand")
+        parser.print_usage()
+        exit(1)
+
     kwargs = {
         k: v for k, v in vars(args).items() if k != "func"
     }
