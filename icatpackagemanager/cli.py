@@ -27,13 +27,15 @@ def run():
         help="The component to install")
     install_parser.add_argument(
         "version",
-        help="Specific version to install. Defaults to latest version if not specified",
+        help="Specific version to install. Defaults to latest version if not "
+             "specified",
         type=Version,
         nargs="?")
     install_parser.add_argument(
         "-s", "--allow-snapshots",
         action="store_true",
-        help="Allow snapshot versions. If not set, only non -SNAPSHOT versions will be used"
+        help="Allow snapshot versions. If not set, only non -SNAPSHOT versions "
+             "will be used"
     )
     install_parser.set_defaults(func=commands.do_install)
 
