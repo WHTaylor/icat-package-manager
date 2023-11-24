@@ -5,25 +5,47 @@ from . import repo
 from .utils import Version
 
 
-def do_list(component: Optional[str]):
-    installed = files.get_installed_packages()
+def _get_component_versions(component: str, installed_only: bool):
+    installed_only_packages = files.get_installed_packages()
+    installed_only_versions = installed_only_packages.get(component, [])
 
-    if component:
+    if installed_only:
+        for v in installed_only_versions:
+            yield v
+    else:
         available_versions = repo.get_component_versions(component)
-        installed_versions = installed.get(component, [])
         for v in available_versions:
-            if v in installed_versions:
-                print(f"{v} (installed)")
+            if v in installed_only_versions:
+                yield f"{v} (installed)"
             else:
-                print(v)
+                yield v
+
+
+def _get_packages(installed_only: bool):
+    installed_only_packages = files.get_installed_packages()
+
+    if installed_only:
+        for package in installed_only_packages:
+            current = max(installed_only_packages[package])
+            yield f"{package} - {current}"
     else:
         available = repo.get_components()
         for package in available:
-            if package in installed:
-                current = max(installed[package])
-                print(f"{package} (installed: {current})")
+            if package in installed_only_packages:
+                current = max(installed_only_packages[package])
+                yield f"{package} (installed: {current})"
             else:
-                print(package)
+                yield package
+
+
+def do_list(component: Optional[str], installed_only: bool):
+    if component:
+        source = _get_component_versions(component, installed_only)
+    else:
+        source = _get_packages(installed_only)
+
+    for line in source:
+        print(line)
 
 
 def do_install(

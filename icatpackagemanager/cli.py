@@ -16,6 +16,12 @@ def run():
         "component",
         nargs="?",
         help="List available versions of a specific component")
+    list_parser.add_argument(
+        "-i", "--installed",
+        action="store_true",
+        dest="installed_only",
+        help="Show only installed components, or only installed versions for a "
+             "components")
     list_parser.set_defaults(func=commands.do_list)
 
     install_parser = subparsers.add_parser(
