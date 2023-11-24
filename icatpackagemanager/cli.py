@@ -45,6 +45,21 @@ def run():
     )
     install_parser.set_defaults(func=commands.do_install)
 
+    upgrade_parser = subparsers.add_parser(
+        "upgrade",
+        help="Upgrade to the newest available version of a component"
+    )
+    upgrade_parser.add_argument(
+        "component",
+        help="The component to upgrade")
+    upgrade_parser.add_argument(
+        "-s", "--allow-snapshots",
+        action="store_true",
+        help="Allow snapshot versions. If not set, only non -SNAPSHOT versions "
+             "will be used"
+    )
+    upgrade_parser.set_defaults(func=commands.do_upgrade)
+
     args = parser.parse_args()
     if not hasattr(args, 'func'):
         print("Must provide a subcommand")

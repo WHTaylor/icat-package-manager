@@ -82,3 +82,11 @@ def do_install(
 
     print(f"Copying config from existing install to {dest}")
     files.copy_config(component, max(installed), install_version)
+
+
+def do_upgrade(component: str, allow_snapshots: bool = False):
+    installed_versions = files.get_installed_packages().get(component, [])
+    if not installed_versions:
+        print(f"No existing {component} install to upgrade")
+        return
+    do_install(component, allow_snapshots=allow_snapshots)

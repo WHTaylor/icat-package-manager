@@ -33,5 +33,4 @@ Available commands:
 
 ## Planned work
 
- - Add an `upgrade` command
  - Add a `deploy` command or `--deploy` option on `install` to run setup scripts
