@@ -16,7 +16,7 @@ Available commands:
    - If there is no newer version, do nothing.
    - Otherwise, download latest distro, and unzips it into install directory
    - If there is no previous version, stop and prompt for configuration
-   - Otherwise, copy config from previous version, and run setup script
+   - Otherwise, copy config from previous version, and (not implemented yet) run the setup script
  - `install <component> <version>` - installs specific version of a package
 
 ## Terminology
