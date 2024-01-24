@@ -62,7 +62,7 @@ def download_distro(
         url = f"{repo_url}/{component}/{version}/{fname}"
         print(f"Getting {url}")
     else:
-        fname = get_distros(component, version)[0]
+        fname = get_distros(component, version)[-1]
         url = f"{repo_url}/{component}/{version}/{fname}"
 
     dest = get_cache_destination(fname)
